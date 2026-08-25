@@ -1,0 +1,17 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "schema-field-mapper"
+version = "0.1.0"
+description = "AI-powered pipeline for automatic database field mapping using semantic embeddings"
+requires-python = ">=3.10"
+dependencies = [
+    "openai>=1.0.0",
+    "faiss-cpu>=1.7.4",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+
+]
+

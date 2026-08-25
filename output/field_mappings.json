@@ -1,0 +1,302 @@
+{
+  "mapping_version": "1.0",
+  "source": "legacy_hrm (MySQL)",
+  "destination": "people_platform (MongoDB)",
+  "generated_at": "2026-08-25T03:49:43.017564+00:00",
+  "tables": [
+    {
+      "source_table": "dept_info",
+      "destination_collection": "departments",
+      "confidence": 0.52,
+      "reasoning": "Mapping dept_info to departments",
+      "field_mappings": [
+        {
+          "source_field": "dept_cd",
+          "destination_field": "departmentCode",
+          "type_transform": "none",
+          "reasoning": "The source field 'dept_cd' directly maps to 'departments.departmentCode' as both represent the same concept of a department code.",
+          "notes": null,
+          "confidence": 0.58
+        },
+        {
+          "source_field": "dept_nm",
+          "destination_field": "name",
+          "type_transform": "none",
+          "reasoning": "The source field 'dept_nm' directly maps to the target field 'departments.name' as both represent the department name.",
+          "notes": null,
+          "confidence": 0.59
+        },
+        {
+          "source_field": "parent_dept_id",
+          "destination_field": "parentDepartmentId",
+          "type_transform": "INT -> ObjectId",
+          "reasoning": "The parent_dept_id from dept_info is a foreign key referencing dept_info.dept_id, which corresponds to the parentDepartmentId in the departments collection.",
+          "notes": null,
+          "confidence": 0.44
+        },
+        {
+          "source_field": "dept_head_id",
+          "destination_field": "managerId",
+          "type_transform": "INT -> ObjectId",
+          "reasoning": "The dept_head_id field is a foreign key referencing emp_master.emp_id, which corresponds to employees._id, making employees.managerId the best match as it also references employees._id.",
+          "notes": null,
+          "confidence": 0.42
+        },
+        {
+          "source_field": "cost_ctr_cd",
+          "destination_field": "costCenterCode",
+          "type_transform": "no transformation needed",
+          "reasoning": "The source field 'cost_ctr_cd' directly corresponds to the target field 'costCenterCode' with the same description and purpose.",
+          "notes": null,
+          "confidence": 0.76
+        },
+        {
+          "source_field": "dept_stat",
+          "destination_field": "isActive",
+          "type_transform": "CHAR(1) -> Boolean: 'A' maps -> true, 'I' maps -> false",
+          "reasoning": "The dept_stat field indicates active or inactive status, which directly corresponds to the isActive Boolean flag.",
+          "notes": null,
+          "confidence": 0.35
+        }
+      ],
+      "unmapped_source_fields": [],
+      "unmapped_destination_fields": []
+    },
+    {
+      "source_table": "emp_master",
+      "destination_collection": "employees",
+      "confidence": 0.39,
+      "reasoning": "Mapping emp_master to employees",
+      "field_mappings": [
+        {
+          "source_field": "emp_id",
+          "destination_field": "employees._id",
+          "type_transform": "no transformation needed, INT -> ObjectId mapping",
+          "reasoning": "The source field emp_id is a primary key and must map to the primary key field employees._id in the target collection.",
+          "notes": "Ensure that emp_id values are converted to ObjectId format if necessary.",
+          "confidence": 0.44
+        },
+        {
+          "source_field": "emp_cd",
+          "destination_field": "employeeCode",
+          "type_transform": "none",
+          "reasoning": "The emp_cd field directly corresponds to a unique human-readable ID in the employees collection, making it the best match.",
+          "notes": null,
+          "confidence": 0.5
+        },
+        {
+          "source_field": "f_name",
+          "destination_field": "fullName.firstName",
+          "type_transform": "none",
+          "reasoning": "The source field f_name directly corresponds to the nested field firstName in the employees collection.",
+          "notes": null,
+          "confidence": 0.3
+        },
+        {
+          "source_field": "l_name",
+          "destination_field": "fullName.lastName",
+          "type_transform": "No transformation needed as both are String types.",
+          "reasoning": "The field l_name directly corresponds to the lastName in the nested fullName object, making it the best match.",
+          "notes": null,
+          "confidence": 0.38
+        },
+        {
+          "source_field": "hire_dt",
+          "destination_field": "startDate",
+          "type_transform": "DATETIME -> ISODate",
+          "reasoning": "The hire_dt field directly corresponds to the employment start date, making employees.startDate the best match.",
+          "notes": null,
+          "confidence": 0.45
+        },
+        {
+          "source_field": "term_dt",
+          "destination_field": "endDate",
+          "type_transform": "no transformation needed, DATETIME -> ISODate",
+          "reasoning": "The term_dt field indicates an employment end date, which aligns with the employees.endDate field.",
+          "notes": "The term_dt field should be set to null if the employee is still active.",
+          "confidence": 0.34
+        },
+        {
+          "source_field": "dept_id",
+          "destination_field": "departmentId",
+          "type_transform": "INT -> ObjectId",
+          "reasoning": "The dept_id from emp_master is a foreign key referencing dept_info.dept_id, which corresponds to departments._id, making employees.departmentId the best match.",
+          "notes": null,
+          "confidence": 0.43
+        },
+        {
+          "source_field": "mgr_emp_id",
+          "destination_field": "managerId",
+          "type_transform": "INT -> ObjectId",
+          "reasoning": "The mgr_emp_id field is a foreign key referencing emp_master.emp_id, which corresponds to employees._id as a manager reference.",
+          "notes": null,
+          "confidence": 0.38
+        },
+        {
+          "source_field": "job_lvl_cd",
+          "destination_field": "jobLevel",
+          "type_transform": "no transformation needed",
+          "reasoning": "The job_lvl_cd field directly corresponds to the jobLevel field in the employees collection, both representing job levels with similar formats.",
+          "notes": null,
+          "confidence": 0.73
+        },
+        {
+          "source_field": "base_sal",
+          "destination_field": "baseSalary",
+          "type_transform": "none",
+          "reasoning": "The base salary field from emp_master directly maps to the baseSalary field in the employees collection, as both represent the same concept of base salary.",
+          "notes": null,
+          "confidence": 0.64
+        },
+        {
+          "source_field": "sal_currency",
+          "destination_field": null,
+          "type_transform": null,
+          "reasoning": "The source field 'sal_currency' represents a currency code, which has no valid match among the candidate target fields that pertain to job levels, salaries, country codes, location codes, or cost center codes.",
+          "notes": null,
+          "confidence": 0.0
+        },
+        {
+          "source_field": "work_email",
+          "destination_field": null,
+          "type_transform": null,
+          "reasoning": "The source field 'work_email' has very different semantics compared to all candidate target fields, which are related to employee status and identification rather than email.",
+          "notes": null,
+          "confidence": 0.0
+        },
+        {
+          "source_field": "work_phone",
+          "destination_field": null,
+          "type_transform": null,
+          "reasoning": "The source field 'work_phone' has very different semantics compared to all candidate target fields, which do not relate to phone numbers.",
+          "notes": null,
+          "confidence": 0.0
+        },
+        {
+          "source_field": "office_loc_id",
+          "destination_field": "locationId",
+          "type_transform": "INT -> ObjectId",
+          "reasoning": "The office_loc_id field is a foreign key referencing locations.loc_id, which corresponds to employees.locationId as it represents the location of an employee.",
+          "notes": null,
+          "confidence": 0.44
+        },
+        {
+          "source_field": "is_remote",
+          "destination_field": "isRemote",
+          "type_transform": "TINYINT(1) -> Boolean",
+          "reasoning": "The source field 'is_remote' directly indicates a remote work status with values 0 or 1, which aligns perfectly with the Boolean representation in the target field.",
+          "notes": null,
+          "confidence": 0.37
+        },
+        {
+          "source_field": "rec_stat",
+          "destination_field": "isActive",
+          "type_transform": "CHAR(1) -> Boolean",
+          "reasoning": "The rec_stat field indicates the active status of an employee, which directly maps to the isActive field in the departments collection.",
+          "notes": "Transform 'A' to true, 'I' and 'T' to false.",
+          "confidence": 0.29
+        },
+        {
+          "source_field": "created_ts",
+          "destination_field": "createdAt",
+          "type_transform": "No transformation needed; both fields are of type DATETIME/ISODate.",
+          "reasoning": "The created_ts field directly corresponds to the createdAt field in the employees collection, both representing the record creation timestamp.",
+          "notes": null,
+          "confidence": 0.66
+        },
+        {
+          "source_field": "updated_ts",
+          "destination_field": "updatedAt",
+          "type_transform": "No transformation needed as both fields are timestamps.",
+          "reasoning": "The source field 'updated_ts' directly corresponds to the target field 'employees.updatedAt' as both represent the last update timestamp.",
+          "notes": null,
+          "confidence": 0.68
+        },
+        {
+          "source_field": "dept_id",
+          "destination_field": "departments._id",
+          "type_transform": "no transformation needed",
+          "reasoning": "The source field dept_id is a primary key and must map to the _id field in the target departments collection.",
+          "notes": null,
+          "confidence": 0.45
+        }
+      ],
+      "unmapped_source_fields": [],
+      "unmapped_destination_fields": []
+    },
+    {
+      "source_table": "locations",
+      "destination_collection": "locations",
+      "confidence": 0.61,
+      "reasoning": "Mapping locations to locations",
+      "field_mappings": [
+        {
+          "source_field": "loc_id",
+          "destination_field": "locations._id",
+          "type_transform": "none",
+          "reasoning": "The source field loc_id is a primary key and must map to the _id field in the locations collection.",
+          "notes": null,
+          "confidence": 0.41
+        },
+        {
+          "source_field": "loc_cd",
+          "destination_field": "code",
+          "type_transform": "none",
+          "reasoning": "The source field 'loc_cd' directly corresponds to the target field 'locations.code' as both represent the same concept of a location code.",
+          "notes": null,
+          "confidence": 0.53
+        },
+        {
+          "source_field": "loc_nm",
+          "destination_field": "name",
+          "type_transform": "none",
+          "reasoning": "The source field loc_nm directly corresponds to the target field locations.name, both representing the location name.",
+          "notes": null,
+          "confidence": 0.58
+        },
+        {
+          "source_field": "address",
+          "destination_field": "address",
+          "type_transform": "VARCHAR -> String",
+          "reasoning": "The source field 'address' directly matches the target field 'locations.address' with the same description and context.",
+          "notes": null,
+          "confidence": 0.75
+        },
+        {
+          "source_field": "state_prov",
+          "destination_field": "stateOrProvince",
+          "type_transform": "VARCHAR -> String",
+          "reasoning": "The source field 'state_prov' directly corresponds to the target field 'locations.stateOrProvince' with the same description.",
+          "notes": null,
+          "confidence": 0.74
+        },
+        {
+          "source_field": "country_cd",
+          "destination_field": "countryCode",
+          "type_transform": "none",
+          "reasoning": "The source field 'country_cd' directly corresponds to the target field 'locations.countryCode', both representing ISO 3166-1 alpha-2 codes.",
+          "notes": null,
+          "confidence": 0.78
+        },
+        {
+          "source_field": "postal_cd",
+          "destination_field": "postalCode",
+          "type_transform": "VARCHAR -> String",
+          "reasoning": "The best match is locations.postalCode as it directly corresponds to the source field postal_cd, both representing postal codes.",
+          "notes": null,
+          "confidence": 0.59
+        },
+        {
+          "source_field": "tz_cd",
+          "destination_field": "timezone",
+          "type_transform": "no transformation needed",
+          "reasoning": "The source field 'tz_cd' directly corresponds to the target field 'locations.timezone', both representing a timezone identifier.",
+          "notes": null,
+          "confidence": 0.5
+        }
+      ],
+      "unmapped_source_fields": [],
+      "unmapped_destination_fields": []
+    }
+  ]
+}
