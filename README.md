@@ -169,6 +169,9 @@ export PYTHONPATH=src
 - Wait a few seconds and retry
 - Use a higher-tier API key for faster limits
 
+## Future improvement
+- do batch processing for table fields instead of single fields
+
 ## License
 
 Interview assignment for IBM.
