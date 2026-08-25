@@ -170,7 +170,7 @@ export PYTHONPATH=src
 - Use a higher-tier API key for faster limits
 
 ## Future improvement
-- do batch processing for table fields instead of single fields
+- do batch processing for table fields instead of sequential processing of fields
 
 ## License
 
