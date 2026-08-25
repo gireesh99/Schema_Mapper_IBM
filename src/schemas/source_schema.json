@@ -1,0 +1,191 @@
+{
+  "database": "legacy_hrm",
+  "tables": {
+    "emp_master": {
+      "fields": [
+        {
+          "name": "emp_id",
+          "type": "INT",
+          "description": "Employee ID",
+          "constraints": "PRIMARY KEY"
+        },
+        {
+          "name": "emp_cd",
+          "type": "VARCHAR(20)",
+          "description": "human-readable employee code",
+          "constraints": "UNIQUE NOT NULL"
+        },
+        {
+          "name": "f_name",
+          "type": "VARCHAR(50)",
+          "description": "First name",
+          "constraints": "NOT NULL"
+        },
+        {
+          "name": "l_name",
+          "type": "VARCHAR(50)",
+          "description": "Last name",
+          "constraints": "NOT NULL"
+        },
+        {
+          "name": "hire_dt",
+          "type": "DATETIME",
+          "description": "Hire date"
+        },
+        {
+          "name": "term_dt",
+          "type": "DATETIME",
+          "description": "null if still active"
+        },
+        {
+          "name": "dept_id",
+          "type": "INT",
+          "description": "FK to dept_info.dept_id"
+        },
+        {
+          "name": "mgr_emp_id",
+          "type": "INT",
+          "description": "FK to emp_master.emp_id"
+        },
+        {
+          "name": "job_lvl_cd",
+          "type": "VARCHAR(10)",
+          "description": "e.g. L1, L2, IC3, M1"
+        },
+        {
+          "name": "base_sal",
+          "type": "DECIMAL(12,2)",
+          "description": "Base salary"
+        },
+        {
+          "name": "sal_currency",
+          "type": "CHAR(3)",
+          "description": "ISO 4217, e.g. USD"
+        },
+        {
+          "name": "work_email",
+          "type": "VARCHAR(120)",
+          "description": "Work email",
+          "constraints": "UNIQUE"
+        },
+        {
+          "name": "work_phone",
+          "type": "VARCHAR(20)",
+          "description": "Work phone"
+        },
+        {
+          "name": "office_loc_id",
+          "type": "INT",
+          "description": "FK to locations.loc_id"
+        },
+        {
+          "name": "is_remote",
+          "type": "TINYINT(1)",
+          "description": "0 or 1"
+        },
+        {
+          "name": "rec_stat",
+          "type": "CHAR(1)",
+          "description": "A=Active, I=Inactive, T=Terminated"
+        },
+        {
+          "name": "created_ts",
+          "type": "DATETIME",
+          "description": "record creation timestamp"
+        },
+        {
+          "name": "updated_ts",
+          "type": "DATETIME",
+          "description": "last update timestamp"
+        }
+      ]
+    },
+    "dept_info": {
+      "fields": [
+        {
+          "name": "dept_id",
+          "type": "INT",
+          "description": "Department ID",
+          "constraints": "PRIMARY KEY"
+        },
+        {
+          "name": "dept_cd",
+          "type": "VARCHAR(20)",
+          "description": "Department code",
+          "constraints": "UNIQUE"
+        },
+        {
+          "name": "dept_nm",
+          "type": "VARCHAR(100)",
+          "description": "Department name"
+        },
+        {
+          "name": "parent_dept_id",
+          "type": "INT",
+          "description": "FK to dept_info.dept_id"
+        },
+        {
+          "name": "dept_head_id",
+          "type": "INT",
+          "description": "FK to emp_master.emp_id"
+        },
+        {
+          "name": "cost_ctr_cd",
+          "type": "VARCHAR(20)",
+          "description": "finance cost center code"
+        },
+        {
+          "name": "dept_stat",
+          "type": "CHAR(1)",
+          "description": "A=Active, I=Inactive"
+        }
+      ]
+    },
+    "locations": {
+      "fields": [
+        {
+          "name": "loc_id",
+          "type": "INT",
+          "description": "Location ID",
+          "constraints": "PRIMARY KEY"
+        },
+        {
+          "name": "loc_cd",
+          "type": "VARCHAR(20)",
+          "description": "Location code",
+          "constraints": "UNIQUE"
+        },
+        {
+          "name": "loc_nm",
+          "type": "VARCHAR(100)",
+          "description": "Location name"
+        },
+        {
+          "name": "address",
+          "type": "VARCHAR(80)",
+          "description": "Street address"
+        },
+        {
+          "name": "state_prov",
+          "type": "VARCHAR(80)",
+          "description": "State or province"
+        },
+        {
+          "name": "country_cd",
+          "type": "CHAR(2)",
+          "description": "ISO 3166-1 alpha-2"
+        },
+        {
+          "name": "postal_cd",
+          "type": "VARCHAR(20)",
+          "description": "Postal code"
+        },
+        {
+          "name": "tz_cd",
+          "type": "VARCHAR(50)",
+          "description": "Timezone"
+        }
+      ]
+    }
+  }
+}

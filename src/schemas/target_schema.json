@@ -1,0 +1,166 @@
+{
+  "database": "people_platform",
+  "collections": {
+    "employees": {
+      "fields": [
+        {
+          "name": "_id",
+          "type": "ObjectId",
+          "description": "Primary key"
+        },
+        {
+          "name": "employeeCode",
+          "type": "String",
+          "description": "unique human-readable ID"
+        },
+        {
+          "name": "fullName",
+          "type": "Object",
+          "nested": {
+            "firstName": "String",
+            "lastName": "String"
+          },
+          "description": "Nested object containing firstName"
+        },
+        {
+          "name": "startDate",
+          "type": "ISODate",
+          "description": "Employment start date"
+        },
+        {
+          "name": "endDate",
+          "type": "ISODate",
+          "description": "Employment end date"
+        },
+        {
+          "name": "jobLevel",
+          "type": "String",
+          "description": "e.g. L1, IC3, M1"
+        },
+        {
+          "name": "isRemote",
+          "type": "Boolean",
+          "description": "Remote work indicator"
+        },
+        {
+          "name": "managerId",
+          "type": "ObjectId",
+          "description": "Reference to employees._id"
+        },
+        {
+          "name": "baseSalary",
+          "type": "Number",
+          "description": "Base salary amount"
+        },
+        {
+          "name": "departmentId",
+          "type": "ObjectId",
+          "description": "Reference to departments._id"
+        },
+        {
+          "name": "locationId",
+          "type": "ObjectId",
+          "description": "Reference to locations._id"
+        },
+        {
+          "name": "timezone",
+          "type": "String",
+          "description": "Timezone identifier"
+        },
+        {
+          "name": "createdAt",
+          "type": "ISODate",
+          "description": "Record creation timestamp"
+        },
+        {
+          "name": "updatedAt",
+          "type": "ISODate",
+          "description": "Last update timestamp"
+        }
+      ]
+    },
+    "departments": {
+      "fields": [
+        {
+          "name": "_id",
+          "type": "ObjectId",
+          "description": "Primary key"
+        },
+        {
+          "name": "departmentCode",
+          "type": "String",
+          "description": "Department code"
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "description": "Department name"
+        },
+        {
+          "name": "parentDepartmentId",
+          "type": "ObjectId",
+          "description": "Reference to departments._id"
+        },
+        {
+          "name": "headEmployeeId",
+          "type": "ObjectId",
+          "description": "Reference to employees._id"
+        },
+        {
+          "name": "costCenterCode",
+          "type": "String",
+          "description": "Finance cost center code"
+        },
+        {
+          "name": "isActive",
+          "type": "Boolean",
+          "description": "Active status flag"
+        }
+      ]
+    },
+    "locations": {
+      "fields": [
+        {
+          "name": "_id",
+          "type": "ObjectId",
+          "description": "Primary key"
+        },
+        {
+          "name": "code",
+          "type": "String",
+          "description": "Location code"
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "description": "Location name"
+        },
+        {
+          "name": "address",
+          "type": "String",
+          "description": "Street address"
+        },
+        {
+          "name": "stateOrProvince",
+          "type": "String",
+          "description": "State or province"
+        },
+        {
+          "name": "countryCode",
+          "type": "String",
+          "description": "ISO 3166-1 alpha-2"
+        },
+        {
+          "name": "postalCode",
+          "type": "String",
+          "description": "Postal code"
+        },
+        {
+          "name": "timezone",
+          "type": "String",
+          "description": "Timezone identifier"
+        }
+      ]
+    }
+  }
+}
